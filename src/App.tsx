@@ -1,24 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { FC } from 'react';
+import {useSelector} from 'react-redux'
 import './App.css';
+import Header from './components/Header'
+import Sidebar from './components/SideBar';
+import Notification from './components/Notification';
+import {RootState} from './store/store'
 
-function App() {
+const App: FC = () => {
+  const notificationMsg = useSelector((state: RootState)=> state.notification.msg);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header title='Lista de Tareas App' subtitle='Crear algunas listas y agregar alguna tarea a cada lista' />
+
+      <div className="container px-5">
+        <div className="columns">
+          <Sidebar/>
+        </div>
+      </div>
+      <Notification msg={notificationMsg}/>
     </div>
   );
 }
